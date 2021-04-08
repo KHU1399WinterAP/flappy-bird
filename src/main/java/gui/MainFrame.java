@@ -8,7 +8,6 @@ import java.awt.*;
 public class MainFrame extends JFrame {
 	private JPanel mainPanel;
 	private JLabel birdLabel;
-	private JLabel xyz;
 	
 	public MainFrame() {
 		super("Flappy Bird");
@@ -24,12 +23,12 @@ public class MainFrame extends JFrame {
 	}
 	
 	private void initCustomComponents() {
-		xyz = new JLabel();
-		xyz.setIcon(SpriteConfig.BIRD);
-		xyz.setSize(100, 100);
-		xyz.setLocation(50, 50);
+		birdLabel = new JLabel();
+		birdLabel.setIcon(SpriteConfig.BIRD_STATE_01);
+		birdLabel.setSize(SpriteConfig.BIRD_STATE_01.getIconWidth(), SpriteConfig.BIRD_STATE_01.getIconHeight());
+		birdLabel.setLocation(50, 50);
 		
-		mainPanel.add(xyz);
+		mainPanel.add(birdLabel);
 	}
 	
 	private void createUIComponents() {
@@ -41,7 +40,5 @@ public class MainFrame extends JFrame {
 		};
 		
 		mainPanel.setLayout(null);
-		
-		birdLabel = new JLabel();
 	}
 }

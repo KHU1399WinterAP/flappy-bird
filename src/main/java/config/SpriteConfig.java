@@ -8,11 +8,12 @@ import java.net.URL;
 
 public class SpriteConfig {
 	private static final URL BACKGROUND_URL = SpriteConfig.class.getResource("/main/resources/sprites/Background.png");
-	private static final URL BIRD_URL = SpriteConfig.class.getResource("/main/resources/sprites/Background.png");
+	
+	private static final URL BIRD_STATE_01_URL = SpriteConfig.class.getResource("/main/resources/sprites/Bird - State 01.png");
 	
 	public static final BufferedImage BACKGROUND = createImage(BACKGROUND_URL, "Background");
 	
-	public static final Icon BIRD = createIcon(BIRD_URL, "Bird");
+	public static final Icon BIRD_STATE_01 = createIcon(BIRD_STATE_01_URL, "Bird");
 	
 	private static BufferedImage createImage(URL url, String name) {
 		try {
