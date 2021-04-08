@@ -1,29 +1,34 @@
 package main.java.animations;
 
 import main.java.config.SpriteConfig;
+import main.java.utils.GuiUtils;
 
 import javax.swing.*;
 
 public class PipeAnimation extends Thread {
 	private final JPanel PANEL;
+	private final JLabel BIRD_LABEL;
 	private final int INTERVAL;
 	private final int SPEED;
+	private final Runnable GAME_OVER_CALLBACK;
 	
-	public PipeAnimation(JPanel panel, int interval, int speed) {
+	public PipeAnimation(JPanel panel, JLabel birdLabel, int interval, int speed, Runnable gameOverCallback) {
 		this.PANEL = panel;
+		this.BIRD_LABEL = birdLabel;
 		this.INTERVAL = interval;
 		this.SPEED = speed;
+		this.GAME_OVER_CALLBACK = gameOverCallback;
 	}
 	
-	public PipeAnimation(JPanel panel) {
-		this(panel, 1800, 2);
+	public PipeAnimation(JPanel panel, JLabel birdLabel, Runnable gameOverCallback) {
+		this(panel, birdLabel, 1800, 2, gameOverCallback);
 	}
 	
 	@Override
 	public void run() {
 		try {
 			while (true) {
-				new PipeMovementAnimation(PANEL, SPEED).start();
+				new PipeMovementAnimation(PANEL, BIRD_LABEL, SPEED, GAME_OVER_CALLBACK).start();
 				
 				sleep(INTERVAL);
 			}
@@ -41,14 +46,18 @@ class PipeMovementAnimation extends Thread {
 	private final int SLEEP = 10;
 	
 	private final JPanel PANEL;
+	private final JLabel BIRD_LABEL;
 	private final int SPEED;
+	private final Runnable GAME_OVER_CALLBACK;
 	
 	private JLabel top;
 	private JLabel bottom;
 	
-	public PipeMovementAnimation(JPanel panel, int speed) {
+	public PipeMovementAnimation(JPanel panel, JLabel birdLabel, int speed, Runnable gameOverCallback) {
 		this.PANEL = panel;
+		this.BIRD_LABEL = birdLabel;
 		this.SPEED = speed;
+		this.GAME_OVER_CALLBACK = gameOverCallback;
 	}
 	
 	@Override
@@ -63,6 +72,11 @@ class PipeMovementAnimation extends Thread {
 				
 				top.setLocation(x, top.getY());
 				bottom.setLocation(x, bottom.getY());
+				
+				if (GuiUtils.isCollided(BIRD_LABEL, top) || GuiUtils.isCollided(BIRD_LABEL, bottom)) {
+					GAME_OVER_CALLBACK.run();
+					break;
+				}
 				
 				if (x <= FINAL_X)
 					break;

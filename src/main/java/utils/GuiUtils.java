@@ -16,6 +16,23 @@ public class GuiUtils {
 				}
 		);
 	}
+	
+	public static boolean isCollided(JLabel subject, JLabel obstacle) {
+		var subjectMinimumX = subject.getX();
+		var subjectMaximumX = subject.getX() + subject.getWidth();
+		var subjectMinimumY = subject.getY();
+		var subjectMaximumY = subject.getY() + subject.getHeight();
+		
+		var obstacleMinimumX = obstacle.getX();
+		var obstacleMaximumX = obstacle.getX() + obstacle.getWidth();
+		var obstacleMinimumY = obstacle.getY();
+		var obstacleMaximumY = obstacle.getY() + obstacle.getHeight();
+		
+		if (subjectMaximumX <= obstacleMinimumX || subjectMinimumX >= obstacleMaximumX)
+			return false;
+		
+		return subjectMaximumY > obstacleMinimumY && subjectMinimumY < obstacleMaximumY;
+	}
 }
 
 class EmptyMouseListener implements MouseListener {

@@ -64,7 +64,7 @@ public class MainFrame extends JFrame {
 		birdGravityAnimation = new GravityAnimation(birdLabel, this::gameOver);
 		birdGravityAnimation.start();
 		
-		pipeAnimation = new PipeAnimation(mainPanel);
+		pipeAnimation = new PipeAnimation(mainPanel, birdLabel, this::gameOver);
 		pipeAnimation.start();
 	}
 	
