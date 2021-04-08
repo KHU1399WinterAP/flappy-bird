@@ -3,13 +3,12 @@ package main.java.gui;
 import main.java.animations.BirdFlyAnimation;
 import main.java.animations.BirdJumpAnimation;
 import main.java.animations.GravityAnimation;
+import main.java.animations.PipeAnimation;
 import main.java.config.SpriteConfig;
 import main.java.utils.GuiUtils;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 public class MainFrame extends JFrame {
 	private JPanel mainPanel;
@@ -62,6 +61,8 @@ public class MainFrame extends JFrame {
 		
 		birdGravityAnimation = new GravityAnimation(birdLabel);
 		birdGravityAnimation.start();
+		
+		new PipeAnimation(mainPanel).start();
 	}
 	
 	private void initListeners() {

@@ -19,7 +19,7 @@ public class BirdJumpAnimation extends Thread {
 	}
 	
 	public BirdJumpAnimation(JLabel birdLabel, Runnable endCallback) {
-		this(birdLabel, 80, 100, endCallback);
+		this(birdLabel, 60, 200, endCallback);
 	}
 	
 	@Override

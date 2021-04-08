@@ -8,9 +8,11 @@ import java.io.IOException;
 import java.net.URL;
 
 public class SpriteConfig {
-	private static final int BIRD_SIZE_MULTIPLIER = 2;
+	private static final int SIZE_MULTIPLIER = 2;
 	
 	private static final URL BACKGROUND_URL = SpriteConfig.class.getResource("/main/resources/sprites/Background.png");
+	private static final URL PIPE_URL = SpriteConfig.class.getResource("/main/resources/sprites/Pipe.png");
+	private static final URL PIPE_REVERSE_URL = SpriteConfig.class.getResource("/main/resources/sprites/Pipe Reverse.png");
 	
 	private static final URL BIRD_STATE_01_URL = SpriteConfig.class.getResource("/main/resources/sprites/Bird - State 01.png");
 	private static final URL BIRD_STATE_02_URL = SpriteConfig.class.getResource("/main/resources/sprites/Bird - State 02.png");
@@ -18,9 +20,11 @@ public class SpriteConfig {
 	
 	public static final BufferedImage BACKGROUND = createImage(BACKGROUND_URL, "Background");
 	
-	public static final Icon BIRD_STATE_01 = createIcon(BIRD_STATE_01_URL, "Bird");
-	public static final Icon BIRD_STATE_02 = createIcon(BIRD_STATE_02_URL, "Bird");
-	public static final Icon BIRD_STATE_03 = createIcon(BIRD_STATE_03_URL, "Bird");
+	public static final Icon BIRD_STATE_01 = createIcon(BIRD_STATE_01_URL, "Bird - State 01", SIZE_MULTIPLIER);
+	public static final Icon BIRD_STATE_02 = createIcon(BIRD_STATE_02_URL, "Bird - State 02", SIZE_MULTIPLIER);
+	public static final Icon BIRD_STATE_03 = createIcon(BIRD_STATE_03_URL, "Bird - State 03", SIZE_MULTIPLIER);
+	public static final Icon PIPE = createIcon(PIPE_URL, "Pipe", SIZE_MULTIPLIER);
+	public static final Icon PIPE_REVERSE = createIcon(PIPE_REVERSE_URL, "Pipe Reverse", SIZE_MULTIPLIER);
 	
 	private static BufferedImage createImage(URL url, String name) {
 		try {
@@ -35,12 +39,12 @@ public class SpriteConfig {
 		return null;
 	}
 	
-	private static Icon createIcon(URL url, String name) {
+	private static Icon createIcon(URL url, String name, int sizeMultiplier) {
 		try {
 			if (url != null) {
 				var image = ImageIO.read(url);
-				var width = image.getWidth() * BIRD_SIZE_MULTIPLIER;
-				var height = image.getHeight() * BIRD_SIZE_MULTIPLIER;
+				var width = image.getWidth() * sizeMultiplier;
+				var height = image.getHeight() * sizeMultiplier;
 				
 				return new ImageIcon(image.getScaledInstance(width, height, Image.SCALE_SMOOTH));
 			}
