@@ -1,5 +1,6 @@
 package main.java.gui;
 
+import main.java.animations.BirdFlyAnimation;
 import main.java.config.SpriteConfig;
 
 import javax.swing.*;
@@ -8,6 +9,8 @@ import java.awt.*;
 public class MainFrame extends JFrame {
 	private JPanel mainPanel;
 	private JLabel birdLabel;
+	
+	private Thread birdFlyAnimation;
 	
 	public MainFrame() {
 		super("Flappy Bird");
@@ -20,15 +23,7 @@ public class MainFrame extends JFrame {
 		setLocationRelativeTo(null);
 		
 		initCustomComponents();
-	}
-	
-	private void initCustomComponents() {
-		birdLabel = new JLabel();
-		birdLabel.setIcon(SpriteConfig.BIRD_STATE_01);
-		birdLabel.setSize(SpriteConfig.BIRD_STATE_01.getIconWidth(), SpriteConfig.BIRD_STATE_01.getIconHeight());
-		birdLabel.setLocation(50, 50);
-		
-		mainPanel.add(birdLabel);
+		initAnimations();
 	}
 	
 	private void createUIComponents() {
@@ -40,5 +35,22 @@ public class MainFrame extends JFrame {
 		};
 		
 		mainPanel.setLayout(null);
+	}
+	
+	private void initCustomComponents() {
+		var width = SpriteConfig.BIRD_STATE_01.getIconWidth();
+		var height = SpriteConfig.BIRD_STATE_01.getIconHeight();
+		
+		birdLabel = new JLabel();
+		birdLabel.setIcon(SpriteConfig.BIRD_STATE_01);
+		birdLabel.setSize(width, height);
+		birdLabel.setLocation(50, 50);
+		
+		mainPanel.add(birdLabel);
+	}
+	
+	private void initAnimations() {
+		birdFlyAnimation = new BirdFlyAnimation(birdLabel);
+		birdFlyAnimation.start();
 	}
 }
