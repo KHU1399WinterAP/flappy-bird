@@ -1,6 +1,7 @@
 package main.java.gui;
 
 import main.java.animations.BirdFlyAnimation;
+import main.java.animations.GravityAnimation;
 import main.java.config.SpriteConfig;
 
 import javax.swing.*;
@@ -11,6 +12,7 @@ public class MainFrame extends JFrame {
 	private JLabel birdLabel;
 	
 	private Thread birdFlyAnimation;
+	private Thread birdGravityAnimation;
 	
 	public MainFrame() {
 		super("Flappy Bird");
@@ -52,5 +54,8 @@ public class MainFrame extends JFrame {
 	private void initAnimations() {
 		birdFlyAnimation = new BirdFlyAnimation(birdLabel);
 		birdFlyAnimation.start();
+		
+		birdGravityAnimation = new GravityAnimation(birdLabel);
+		birdGravityAnimation.start();
 	}
 }
