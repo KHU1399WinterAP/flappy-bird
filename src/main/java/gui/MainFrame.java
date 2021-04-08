@@ -9,6 +9,7 @@ import main.java.utils.GuiUtils;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowEvent;
 
 public class MainFrame extends JFrame {
 	private JPanel mainPanel;
@@ -16,6 +17,7 @@ public class MainFrame extends JFrame {
 	
 	private Thread birdFlyAnimation;
 	private Thread birdGravityAnimation;
+	private Thread pipeAnimation;
 	
 	public MainFrame() {
 		super("Flappy Bird");
@@ -59,10 +61,11 @@ public class MainFrame extends JFrame {
 		birdFlyAnimation = new BirdFlyAnimation(birdLabel);
 		birdFlyAnimation.start();
 		
-		birdGravityAnimation = new GravityAnimation(birdLabel);
+		birdGravityAnimation = new GravityAnimation(birdLabel, this::gameOver);
 		birdGravityAnimation.start();
 		
-		new PipeAnimation(mainPanel).start();
+		pipeAnimation = new PipeAnimation(mainPanel);
+		pipeAnimation.start();
 	}
 	
 	private void initListeners() {
@@ -74,5 +77,11 @@ public class MainFrame extends JFrame {
 			GravityAnimation.halt = true;
 			new BirdJumpAnimation(birdLabel, () -> GravityAnimation.halt = false).start();
 		});
+	}
+	
+	private void gameOver() {
+		System.out.println("GAME OVER!");
+		WindowEvent closingEvent = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
+		Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closingEvent);
 	}
 }
