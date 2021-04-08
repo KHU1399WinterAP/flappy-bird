@@ -1,11 +1,15 @@
 package main.java.gui;
 
 import main.java.animations.BirdFlyAnimation;
+import main.java.animations.BirdJumpAnimation;
 import main.java.animations.GravityAnimation;
 import main.java.config.SpriteConfig;
+import main.java.utils.GuiUtils;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class MainFrame extends JFrame {
 	private JPanel mainPanel;
@@ -26,6 +30,7 @@ public class MainFrame extends JFrame {
 		
 		initCustomComponents();
 		initAnimations();
+		initListeners();
 	}
 	
 	private void createUIComponents() {
@@ -57,5 +62,16 @@ public class MainFrame extends JFrame {
 		
 		birdGravityAnimation = new GravityAnimation(birdLabel);
 		birdGravityAnimation.start();
+	}
+	
+	private void initListeners() {
+		initMainPanelListeners();
+	}
+	
+	private void initMainPanelListeners() {
+		GuiUtils.addMouseReleasedListener(mainPanel, e -> {
+			GravityAnimation.halt = true;
+			new BirdJumpAnimation(birdLabel, () -> GravityAnimation.halt = false).start();
+		});
 	}
 }
