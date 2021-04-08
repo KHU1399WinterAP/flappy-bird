@@ -1,7 +1,10 @@
 package main.java.app;
 
+import main.java.gui.MainFrame;
+
 public class Main {
 	public static void main(String[] args) {
-		System.out.println("Hello, friend!");
+		MainFrame mainFrame = new MainFrame();
+		mainFrame.setVisible(true);
 	}
 }
